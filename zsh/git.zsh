@@ -31,6 +31,42 @@ git_current_feature() {
   echo $_FEATURE
 }
 
+git_delete_branch() {
+  local _all_branches
+
+  _all_branches=$( command git branch )
+  if [ "$?" -ne 0 ]; then
+    echo "Failed; are you in a Git repository?"
+    return 1
+  fi
+
+  _all_branches=( $( cut -c 3- <<< $_all_branches ) )
+
+  local _matching_branches
+  _matching_branches=()
+
+  for b in "${_all_branches[@]}"; do
+    if [[ "$b" =~ "$1" ]]; then
+      _matching_branches+=("$b")
+    fi
+  done
+
+  if [[ ${#_matching_branches[@]} == 0 ]]; then
+    echo "No branches matched expression '$1'"
+    return 1
+  elif [[ ${#_matching_branches[@]} > 1 ]]; then
+    echo "Multiple branches matched expression '$1':"
+    for b in "${_matching_branches[@]}"; do
+      echo $b
+    done
+    return 2
+  fi
+
+  echo Deleting branch: $_matching_branches
+
+  git branch -d "$_matching_branches[1]"
+}
+
 alias gffs="git flow feature start"
 alias gfff="git flow feature finish"
 alias gfffc="git flow feature finish \`git_current_feature\`"
