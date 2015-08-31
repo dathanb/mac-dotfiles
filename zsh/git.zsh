@@ -70,3 +70,4 @@ git_delete_branch() {
 alias gffs="git flow feature start"
 alias gfff="git flow feature finish"
 alias gfffc="git flow feature finish \`git_current_feature\`"
+alias gdbr="git_delete_branch"
