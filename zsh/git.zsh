@@ -102,5 +102,5 @@ git_checkout_regex() {
 alias gffs="git flow feature start"
 alias gfff="git flow feature finish"
 alias gfffc="git flow feature finish \`git_current_feature\`"
-alias gdbr="git_delete_branch"
+alias gbdr="git_delete_branch"
 alias gcor="git_checkout_regex"
