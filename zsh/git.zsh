@@ -43,15 +43,14 @@ git_current_feature() {
 
 # Matches the set of local branches against the provided regex
 # If there's no match, fails
-# If there are multipe matches, prints the matching branches and fails
-# If there's a single match, runs git branch -d matching_branch_name
-git_delete_branch() {
+# If there are multiple matches, prints the matching branches and fails
+# If there's a single match, returns it
+git_branch_regex() {
   git_verify_repo || return 1
   local _branches
 
   _branches=( $( command git branch | cut -c 3- ) )
 
-  local _matching_branches
   _matching_branches=()
 
   for b in "${_branches[@]}"; do
@@ -70,8 +69,14 @@ git_delete_branch() {
     done
     return 2
   fi
+}
 
-  echo Deleting branch: $_matching_branches
+# Matches the set of local branches against the provided regex
+# If there's no match, fails
+# If there are multipe matches, prints the matching branches and fails
+# If there's a single match, runs git branch -d matching_branch_name
+git_delete_branch() {
+  git_branch_regex $1 || return 1
 
   git branch -d "$_matching_branches[1]"
 }
@@ -81,35 +86,20 @@ git_delete_branch() {
 # If there are multiple matches, prints the matching branches and fails
 # If there's a single match, runs git checkout matching_branch_name
 git_checkout_regex() {
-  git_verify_repo || return 1
-
-  local _branches
-  _branches=( $( command git branch | cut -c 3- ) )
-
-  local _matching_branches
-  _matching_branches=()
-
-  for b in "${_branches[@]}"; do
-    if [[ "$b" =~ "$1" ]]; then
-      _matching_branches+=("$b")
-    fi
-  done
-
-  if [[ ${#_matching_branches[@]} == 0 ]]; then
-    echo "No branches matched expression '$1'"
-    return 1
-  elif [[ ${#_matching_branches[@]} > 1 ]]; then
-    echo "Multiple branches matched expression '$1':"
-    for b in "${_matching_branches[@]}"; do
-      echo $b
-    done
-    return 2
-  fi
+  git_branch_regex $1 || return 1
 
   git checkout "$_matching_branches[1]"
-
 }
 
+# Matches the set of local branches against the provided regex
+# If there's no match, fails
+# If there are multiple matches, prints the matching branches and fails
+# If there's a single match, runs git merge --no-ff matching_branch_name
+git_merge_regex() {
+  git_branch_regex $1 || return 1
+
+  git merge --no-ff "$_matching_branches[1]"
+}
 
 alias gst='git status --short'
 # GPU == "Git Push Upstream"
@@ -121,3 +111,5 @@ alias gfffc="git flow feature finish \`git_current_feature\`"
 alias gbdr="git_delete_branch"
 # GCOR == "Git CheckOut with Regex
 alias gcor="git_checkout_regex"
+# GMR == "Git Merge --no-ff with Regex"
+alias gmr="git_merge_regex"
