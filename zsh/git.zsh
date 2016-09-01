@@ -111,6 +111,15 @@ wip() {
   git commit -m "wip"
 }
 
+open_jira_ticket_for_current_branch() {
+  git_verify_repo || return 1
+
+  _BRANCH=`git rev-parse --abbrev-ref HEAD`
+  _TICKET=`sed -E -e 's/^([[:alpha:]]+\/)*([[:alpha:]]+-[[:digit:]]+).*$/\2/' <<< $_BRANCH`
+
+  open "https://udacity.atlassian.net/browse/${_TICKET}"
+}
+
 # If the last commit was a "work in progress" commit, resets it
 # Inspired by https://gist.github.com/tzellman/1948602#file-gitconfig-L3
 unwip() {
@@ -131,5 +140,4 @@ alias gcor="git_checkout_regex"
 # GMR == "Git Merge --no-ff with Regex"
 alias gmr="git_merge_regex"
 alias gff="git pull --ff-only"
-
-
+alias jira="open_jira_ticket_for_current_branch"
