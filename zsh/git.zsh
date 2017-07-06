@@ -127,6 +127,13 @@ unwip() {
   git log -n 1 | grep -q -c wip && git reset HEAD~1
 }
 
+# removes local branches that have been merged
+git_clean_merged_branches() {
+  git_verify_repo || return 1
+
+  git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+}
+
 alias gst='git status --short'
 # GPU == "Git Push Upstream"
 alias gpu='git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`'

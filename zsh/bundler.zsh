@@ -1,1 +1,1 @@
-alias be='bundler exec'
+alias be='bundle exec'
