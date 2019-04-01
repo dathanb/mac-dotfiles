@@ -73,6 +73,7 @@ plugins=(
   vi-mode
   fzf
   zsh-autosuggestions
+  history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
