@@ -64,11 +64,15 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
-    dathan-git
-    dathan-gradle
-    dathan-tmux
-    fasd
-    dathan-fasd
+  dathan-git
+  dathan-gradle
+  dathan-tmux
+  fasd
+  dathan-fasd
+  zsh-navigation-tools
+  vi-mode
+  fzf
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -107,7 +111,7 @@ if [ -f ~/.iterm2_shell_integration.zsh ]; then
 fi
 
 # use vim-style key bindings
-bindkey -v
+#bindkey -v
 
 # use ctrl+v for edit in vim
 autoload -U edit-command-line
@@ -115,3 +119,18 @@ zle -N edit-command-line
 bindkey -M vicmd ^v edit-command-line
 
 export TERM=xterm-256color
+
+# save command history
+# export HISTFILE=~/.history
+export HISTSIZE=1000
+export SAVEHIST=1000
+export EXTENDED_HISTORY=true
+export INC_APPEND_HISTORY=true
+export HIST_EXPIRE_DUPS_FIRST=true
+# scroll through command history with arrow keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
