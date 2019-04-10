@@ -117,7 +117,7 @@ open_jira_ticket_for_current_branch() {
   _BRANCH=`git rev-parse --abbrev-ref HEAD`
   _TICKET=`sed -E -e 's/^([[:alpha:]]+\/)*([[:alpha:]]+-[[:digit:]]+).*$/\2/' <<< $_BRANCH`
 
-  open "https://udacity.atlassian.net/browse/${_TICKET}"
+  open "https://jira.netflix.com/browse/${_TICKET}"
 }
 
 # If the last commit was a "work in progress" commit, resets it
