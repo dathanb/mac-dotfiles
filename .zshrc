@@ -135,3 +135,9 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+
+if [ -d ~/.zsh-custom ]; then
+  for f in ~/.zsh-custom/*.zsh; do
+    source "$f"
+  done
+fi
