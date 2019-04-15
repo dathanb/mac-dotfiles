@@ -65,3 +65,6 @@ if !has('nvim') && $TERM ==# 'screen-256color'
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
+" Remap the leader to something more convenient than the backslash
+" This shadows the original value of the semicolon, but that's fine - I never really use ftFT anyway
+let mapleader=";"
