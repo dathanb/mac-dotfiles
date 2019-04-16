@@ -72,7 +72,6 @@ plugins=(
   zsh-navigation-tools
   vi-mode
   fzf
-  zsh-autosuggestions
   history-substring-search
 )
 
