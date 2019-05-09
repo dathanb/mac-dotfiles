@@ -120,6 +120,10 @@ bindkey -M vicmd ^v edit-command-line
 
 export TERM=xterm-256color
 
+# Use vim from MacVim
+alias mvim='/Applications/MacVim.app/Contents/bin/mvim'
+alias vim='mvim -v'
+
 # save command history
 # export HISTFILE=~/.history
 export HISTSIZE=1000
