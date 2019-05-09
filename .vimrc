@@ -68,3 +68,6 @@ endif
 " Remap the leader to something more convenient than the backslash
 " This shadows the original value of the semicolon, but that's fine - I never really use ftFT anyway
 let mapleader=";"
+
+" Toggle NERDTree with ;t
+nnoremap <leader>t :NERDTreeToggle<cr>
