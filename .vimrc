@@ -1,7 +1,4 @@
 " Append this to the end of .vimrc
-"
-" NERDTreee
-:nnoremap <D-1> :NERDTreeToggle<cr>
 
 :set fo-=tc
 :set textwidth=120
