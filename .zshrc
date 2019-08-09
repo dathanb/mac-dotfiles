@@ -66,6 +66,12 @@ plugins=(
 	git
   dathan-git
   dathan-gradle
+  dathan-go
+  dathan-gpg
+  dathan-gradle
+  dathan-node
+  dathan-python
+  dathan-ruby
   dathan-tmux
   fasd
   dathan-fasd
@@ -73,6 +79,7 @@ plugins=(
   vi-mode
   fzf
   history-substring-search
+  dathan-zsh
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -144,3 +151,6 @@ if [ -d ~/.zsh-custom ]; then
     source "$f"
   done
 fi
+
+# don't activate the pager when output is less than one screen
+export LESS="${LESS} --no-init --quit-if-one-screen"
