@@ -84,67 +84,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 if [ -f ~/.iterm2_shell_integration.zsh ]; then 
     source ~/.iterm2_shell_integration.zsh
 fi
-
-# use vim-style key bindings
-#bindkey -v
-
-# use ctrl+v for edit in vim
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd ^v edit-command-line
-
-export TERM=xterm-256color
-
-# Use vim from MacVim
-alias mvim='/Applications/MacVim.app/Contents/bin/mvim'
-alias vim='mvim -v'
-
-# save command history
-# export HISTFILE=~/.history
-export HISTSIZE=1000
-export SAVEHIST=1000
-export EXTENDED_HISTORY=true
-export INC_APPEND_HISTORY=true
-export HIST_EXPIRE_DUPS_FIRST=true
-# scroll through command history with arrow keys
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search
-bindkey "^[[B" down-line-or-beginning-search
 
 if [ -d ~/.zsh-custom ]; then
   for f in ~/.zsh-custom/*.zsh; do
@@ -152,5 +94,3 @@ if [ -d ~/.zsh-custom ]; then
   done
 fi
 
-# don't activate the pager when output is less than one screen
-export LESS="${LESS} --no-init --quit-if-one-screen"

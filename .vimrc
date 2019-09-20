@@ -68,3 +68,5 @@ let mapleader=";"
 
 " Toggle NERDTree with ;t
 nnoremap <leader>t :NERDTreeToggle<cr>
+" auto-close NERDTree when opening a file
+let NERDTreeQuitOnOpen=1
