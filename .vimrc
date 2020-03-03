@@ -2,6 +2,7 @@
 
 :set fo-=tc
 :set textwidth=120
+:set ignorecase
 
 " Always show line numbers
 :set number
@@ -70,3 +71,16 @@ let mapleader=";"
 nnoremap <leader>t :NERDTreeToggle<cr>
 " auto-close NERDTree when opening a file
 let NERDTreeQuitOnOpen=1
+
+" Add mappings to move lines up and down 
+nnoremap <C-S-j> :m .+1<CR>==
+nnoremap <C-S-k> :m .-2<CR>==
+
+" Auto-toggle between standard line numbers in normal mode and hybrid line numbers in insert mode
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END

@@ -134,6 +134,10 @@ git_clean_merged_branches() {
   git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
 }
 
+# use vimdiff
+git config --global diff.tool vimdiff
+git config --global merge.tool vimdiff
+
 alias gr="git rebase"
 alias gci="git commit"
 alias gb='git branch -v'

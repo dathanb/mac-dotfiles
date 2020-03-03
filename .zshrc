@@ -80,6 +80,7 @@ plugins=(
   fzf
   history-substring-search
   dathan-zsh
+  wakatime
 )
 
 source $ZSH/oh-my-zsh.sh
