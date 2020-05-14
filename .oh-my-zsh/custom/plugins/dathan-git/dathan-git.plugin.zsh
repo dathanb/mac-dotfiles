@@ -10,6 +10,7 @@ pluginDir="$(dirname $0:A)"
 . "${pluginDir}/wip.zsh"
 . "${pluginDir}/open_jira_ticket_for_current_branch.zsh"
 . "${pluginDir}/git_semver.zsh"
+. "${pluginDir}/git_clean_merged_branches.zsh
 
 # use vimdiff
 git config --global diff.tool vimdiff
