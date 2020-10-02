@@ -14,6 +14,16 @@
 :syntax enable
 :colorscheme darcula
 
+" Required for vimwiki
+set nocompatible
+:filetype plugin on
+syntax on
+let personal_wiki = {}
+let personal_wiki.path = '~/Documents/notes/personal'
+let netflix_wiki = {}
+let netflix_wiki.path = '~/Documents/notes/netflix'
+let g:vimwiki_list = [personal_wiki, netflix_wiki]
+
 " Enable pathogen
 :execute pathogen#infect()
 :syntax on
