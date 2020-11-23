@@ -20,8 +20,14 @@ set nocompatible
 syntax on
 let personal_wiki = {}
 let personal_wiki.path = '~/Documents/notes/personal'
+let personal_wiki.syntax = 'markdown'
+let personal_wiki.ext = '.md'
+let personal_wiki.diary_rel_path = 'daily_notes'
 let netflix_wiki = {}
 let netflix_wiki.path = '~/Documents/notes/netflix'
+let netflix_wiki.syntax = 'markdown'
+let netflix_wiki.ext = '.md'
+let netflix_wiki.diary_rel_path = 'daily_notes'
 let g:vimwiki_list = [personal_wiki, netflix_wiki]
 
 " Enable pathogen
