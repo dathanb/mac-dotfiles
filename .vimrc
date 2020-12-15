@@ -1,7 +1,7 @@
 " Append this to the end of .vimrc
 
 :set fo-=tc
-:set textwidth=120
+:set textwidth=160
 :set ignorecase
 
 " Always show line numbers
