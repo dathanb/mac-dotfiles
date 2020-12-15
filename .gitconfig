@@ -45,3 +45,7 @@
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
     algorithm = patience
+[user]
+	email = dathanb@netflix.com
+	name = Dathan Bennett
+
