@@ -8,7 +8,7 @@
 :set number
 
 " Use the Source Code Pro font
-:set guifont=SourcecodeVariable-Roman:h12
+:set guifont=SourceCodeVariable-Roman:h14
 
 " Use the Darcula color scheme
 :syntax enable
