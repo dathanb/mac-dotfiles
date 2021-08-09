@@ -11,7 +11,7 @@ function bump_major() {
   version="$(git describe --tags)" || return 1
   newVersion="$("${pluginDir}/semver.sh" bump major "${version}")" || return 1
   git tag -a "v${newVersion}" || return 1
-  git push origin --tags || return 1
+  git push origin "v${newVersion}" || return 1
 }
 
 ##
@@ -23,7 +23,7 @@ function bump_minor() {
   version="$(git describe --tags)" || return 1
   newVersion="$("${pluginDir}/semver.sh" bump minor "${version}")" || return 1
   git tag -a "v${newVersion}" || return 1
-  git push origin --tags || return 1
+  git push origin "v${newVersion}" || return 1
 }
 
 ##
@@ -35,5 +35,5 @@ function bump_patch() {
   version="$(git describe --tags)" || return 1
   newVersion="$("${pluginDir}/semver.sh" bump patch "${version}")" || return 1
   git tag -a "v${newVersion}" || return 1
-  git push origin --tags || return 1
+  git push origin "v${newVersion}" || return 1
 }
