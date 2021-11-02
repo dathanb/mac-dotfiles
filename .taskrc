@@ -11,7 +11,15 @@
 # Use the command 'task show' to see all defaults and overrides
 
 # Files
-data.location=~/Documents/notes/task
+data.location=~/Documents/notes/tasks
+
+# Disable garbage collection, to prevent tasks from getting renumbered when `task list` is run
+# To perform garbage collection, run `task rc.gc=1`
+# Other GC options are described in the comments at https://github.com/GothenburgBitFactory/taskwarrior/issues/2592
+gc=0
+
+# case-insensitive search by default
+search.case.sensitive=no
 
 # Color theme (uncomment one to use)
 #include /usr/local/Cellar/task/2.5.1/share/doc/task/rc/light-16.theme
@@ -29,3 +37,11 @@ data.location=~/Documents/notes/task
 #include /usr/local/Cellar/task/2.5.1/share/doc/task/rc/solarized-light-256.theme
 #include /usr/local/Cellar/task/2.5.1/share/doc/task/rc/no-color.theme
 
+uda.jira.type=string
+uda.jira.label=JIRA
+context.work=+work
+urgency.blocking.coefficient=4
+urgency.user.tag.oncall.coefficient=8
+context.personal=-work
+uda.url.type=string
+uda.url.label=URL
