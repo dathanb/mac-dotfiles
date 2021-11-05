@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+printUsageAndExit() {
+  printf "Usage: jira-to-taskwarrior ticketId\n"
+  exit 1
+}
+
+ticketId="${1}"
+if [[ -z $ticketId ]]; then
+  printUsageAndExit
+fi
+shift
+
+existingTasks="$(task jira:"${ticketId}")"
+if [[ ! -z $existingTasks ]]; then
+  printf "Task for ticket ${ticketId} already exists in TaskWarrior.\n"
+  task "jira:${ticketId}"
+  exit 1
+fi
+
+# TODO: support looking up existing tasks and choosing not to pull in remote updates
+
+json="$(jira view --template json "${ticketId}")"
+
+<<COMMENT
+it looks like this, plus a LOT of null properties
+{
+    "fields": {
+        "aggregateprogress": {
+            "progress": 0,
+            "total": 0
+        },
+        "aggregatetimeestimate": null,
+        "aggregatetimeoriginalestimate": null,
+        "aggregatetimespent": null,
+        "archivedby": null,
+        "archiveddate": null,
+        "comment": {
+            "comments": [],
+            "maxResults": 0,
+            "startAt": 0,
+            "total": 0
+        },
+        "customfield_11558": "Not started",
+        "description": "We didn't start processing LCM status updates until the week of Sept 3, 2020, so our tokens that went DELETED before then aren't correctly updated in our system. We should remove them.",
+        "duedate": null,
+        "labels": [
+            "tokens"
+        ],
+        "priority": {
+            "iconUrl": "https://jira-api.netflix.net:7004/images/icons/priority_unassigned.png",
+            "id": "6",
+            "name": "unassigned",
+            "self": "https://jira-api.netflix.net:7004/rest/api/2/priority/6"
+        },
+        "resolution": null,
+        "status": {
+            "description": "",
+            "iconUrl": "https://jira-api.netflix.net:7004/images/icons/statuses/generic.png",
+            "id": "11793",
+            "name": "Prioritized",
+            "self": "https://jira-api.netflix.net:7004/rest/api/2/status/11793",
+            "statusCategory": {
+                "colorName": "yellow",
+                "id": 4,
+                "key": "indeterminate",
+                "name": "In Progress",
+                "self": "https://jira-api.netflix.net:7004/rest/api/2/statuscategory/4"
+            }
+        },
+        "summary": "Update outdated MC tokens",
+    },
+    "key": "PAY-7534"
+}
+COMMENT
+
+# TODO: detect when the ticket is closed, and complete the local task if appropriate
+
+# we'll use the JIRA summary as the task title
+summary="$(jq -r '.fields.summary' <<< "${json}")"
+echo $summary
+# the jira CLI uses a default project, so the ticket key might be an abbreviation.
+# Let's canonicalize that
+canonicalTicketId="$(jq -r .key <<< "${json}")"
+
+# TODO: add the labels inline instead of post hoc
+taskOutput="$(task add +work "jira:${canonicalTicketId}" -- "${summary}")"
+taskId="$(echo "${taskOutput}" | sed '/Created task/!d' | sed 's/Created task //' | sed 's/\.//')"
+
+labels="$(jq -r '.fields.labels | .[]' <<< "${json}")"
+while read -r label; do
+  task "${taskId}" modify +"${label}"
+done <<< "${labels}"
+
+task "${taskId}"
+
+# taskwarrior doesn't natively support a description that's different from the summary. So when there's a description, we'll add it as the first annotation
+#description="$(jq -r '.fields.description' <<< "${json}")"
+#echo $description
+
+# TODO: support due date
+# TODO: support Snooze Until
+# TODO: support priorities
+

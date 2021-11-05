@@ -39,9 +39,12 @@ search.case.sensitive=no
 
 uda.jira.type=string
 uda.jira.label=JIRA
-context.work=+work
 urgency.blocking.coefficient=4
 urgency.user.tag.oncall.coefficient=8
-context.personal=-work
 uda.url.type=string
 uda.url.label=URL
+context.personal.read=-work
+context.personal.write=+personal
+context.work.read=+work
+context.work.write=+work
+news.version=2.6.0

@@ -80,6 +80,7 @@ plugins=(
   fzf
   history-substring-search
   dathan-zsh
+  taskwarrior
 )
 
 source $ZSH/oh-my-zsh.sh

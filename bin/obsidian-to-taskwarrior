@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Script for adding tasks to TaskWarrior from Obsidian via the "Shell Commands" plugin (https://github.com/Taitava/obsidian-shellcommands)
+
+logFile=~/bin/taskwarrior-obsidian.log
+
+# close stdout and stderr and redirect them to the log file
+rm -f "${logFile}"
+exec 1<&-
+exec 2<&-
+exec 1<>"${logFile}"
+exec 2>&1
+
+date
+echo "${@}"
+pwd
+echo "$(</dev/stdin)"

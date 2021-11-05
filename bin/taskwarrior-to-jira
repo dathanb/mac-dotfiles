@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -x
+
+JIRA_OPTIONS="-v --project=DATHAN"
+
+printUsageAndExit() {
+  printf "Usage: taskwarrior-to-jira taskId\n"
+  exit 1
+}
+
+# expect the local task id as the first argument
+taskId="${1}"
+if [[ -z $taskId ]]; then
+  printf "No taskId provided.\n"
+  printUsageAndExit
+fi
+shift
+
+allTaskData="$(task "${taskId}" export)"
+numItems=`echo "${allTaskData}" | jq ". | length"`
+
+if [[ $numItems != 1 ]]; then
+  printf "Your filter matched ${numItems} tasks. Please narrow it to one.\n"
+  printUsageAndExit
+fi
+
+taskData="$(jq '.[0]' <<< "${allTaskData}")"
+
+# TODO: detect when the task already has a JIRA UDA, and if the task is completed, close the JIRA ticket
+
+# TODO: when go-jira/jira cuts a new release, update this script to use the `jira create --file` option
+#       At that point, we'll be able to construct the entire file using jq object constructor syntax, and won't have to worry about escaping and whatnot
+# TODO: add "Snooze Until" support
+# TODO: add "Due Date" support
+# TODO: add "Labels" support
+# TODO: map priorities
+# TODO: add reporter
+
+summary="$(echo "${taskData}" | jq -r '.description')"
+assignee=dathanb
+
+# Looks like 
+# OK ticket-key ticket-url
+jiraResponse="$(jira create ${JIRA_OPTIONS} --issuetype=Task --override=summary="${summary}" --noedit)"
+IFS=" " read -r createStatus ticketId ticketUrl <<< "${jiraResponse}"
+
+if [[ $createStatus != "OK" ]]; then
+  printf "Expected OK response but got %s. Exiting" "${createStatus}"
+  exit 1
+fi
+
+printf "Updating task %s with JIRA ticket id\n" "${taskId}"
+task "${taskId}" modify jira:${ticketId}
+
+
+# TODO: assert that response was OK
+# TODO: grab the key
+# TODO: use `jira labels set` to set the labbels on the issue
+
