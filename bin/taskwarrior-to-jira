@@ -24,8 +24,14 @@ if [[ $numItems != 1 ]]; then
   printf "Your filter matched ${numItems} tasks. Please narrow it to one.\n"
   printUsageAndExit
 fi
-
 taskData="$(jq '.[0]' <<< "${allTaskData}")"
+
+taskJiraUda="$(jq -r '.jira' <<< "${taskData}")"
+if [[ ! -z $taskJiraUda ]]; then
+  printf "Task %s already has a JIRA. Open https://jira.netflix.net/browse/%s to update it manually.\n" "${taskId}" "${taskJiraUda}"
+  exit 1
+fi
+
 
 # TODO: detect when the task already has a JIRA UDA, and if the task is completed, close the JIRA ticket
 
