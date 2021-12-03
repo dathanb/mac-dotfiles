@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+filter="$1"
+if [[ -z $filter ]]; then
+  echo "Usage: task-open [filter]"
+  exit 1
+fi
+
+data="$(task "$filter" export)"
+count="$(jq ". | length" <<< "$data")"
+if [[ $count != 1 ]]; then
+  echo "Expected filter to match a single task, but it matched ${count}"
+  exit 1
+fi
+
+# url gets preference, then jira
+url="$(jq -r ".[] | .url" <<< "${data}")"
+jiraUrl="$(jq -r ".[] | .jira" <<< "${data}")"
+
+if [[ $url != "null" ]]; then
+  open "${url}"
+  exit 0
+fi
+
+if [[ $jiraUrl != "null" ]]; then
+  open "https://jira.netflix.net/browse/${jiraUrl}"
+  exit 0
+fi
+
+echo "Expected task to have either   url or jira UDA, but none was found"
+exit 1
