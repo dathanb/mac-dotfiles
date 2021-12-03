@@ -32,7 +32,6 @@ if [[ ! -z $taskJiraUda ]]; then
   exit 1
 fi
 
-
 # TODO: detect when the task already has a JIRA UDA, and if the task is completed, close the JIRA ticket
 
 # TODO: when go-jira/jira cuts a new release, update this script to use the `jira create --file` option
@@ -58,9 +57,4 @@ fi
 
 printf "Updating task %s with JIRA ticket id\n" "${taskId}"
 task "${taskId}" modify jira:${ticketId}
-
-
-# TODO: assert that response was OK
-# TODO: grab the key
-# TODO: use `jira labels set` to set the labbels on the issue
 
