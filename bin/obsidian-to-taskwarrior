@@ -2,16 +2,18 @@
 
 # Script for adding tasks to TaskWarrior from Obsidian via the "Shell Commands" plugin (https://github.com/Taitava/obsidian-shellcommands)
 
-logFile=~/bin/taskwarrior-obsidian.log
+PATH="${PATH}:/usr/local/bin"
 
-# close stdout and stderr and redirect them to the log file
+logFile=~/bin/obsidian-to-taskwarrior.log
 rm -f "${logFile}"
-exec 1<&-
-exec 2<&-
-exec 1<>"${logFile}"
-exec 2>&1
+echo "${PATH}" > $logFile
 
-date
-echo "${@}"
-pwd
-echo "$(</dev/stdin)"
+rawInputLine="$(</dev/stdin)"
+parsedInputLine="$(sed -e 's/^[[:blank:]]*- \[ \] //' <<< "${rawInputLine}")"
+
+taskOutput="$(task add "$@" -- "${parsedInputLine}")"
+
+# not used
+taskId="$(sed -e 's/Created task \([[:digit:]]\{1,\}\)./\1/' <<< "${taskOutput}" )"
+
+echo "${taskOutput}"
