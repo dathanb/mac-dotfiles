@@ -89,7 +89,9 @@ taskId="$(echo "${taskOutput}" | sed '/Created task/!d' | sed 's/Created task //
 
 labels="$(jq -r '.fields.labels | .[]' <<< "${json}")"
 while read -r label; do
-  task "${taskId}" modify +"${label}"
+  if [[ ! -z $label ]]; then
+    task "${taskId}" modify +"${label}"
+  fi
 done <<< "${labels}"
 
 task "${taskId}"
