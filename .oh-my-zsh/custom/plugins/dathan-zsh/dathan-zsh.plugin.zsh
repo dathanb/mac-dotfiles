@@ -35,9 +35,8 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
-# Use vim from MacVim
-alias mvim='/Applications/MacVim.app/Contents/bin/mvim'
-alias vim='mvim -v'
+# Use vim from neovim
+alias vim='nvim'
 
 export TERM=xterm-256color
 
