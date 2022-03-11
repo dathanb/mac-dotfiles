@@ -46,6 +46,9 @@
   mnemonicprefix = true
     algorithm = patience
 [user]
-	email = dathanb@netflix.com
+	email = dathan@gmail.com
 	name = Dathan Bennett
+
+[includeIf "gitdir:~/dev/pay"]
+  path = .gitconfig-netflix
 
