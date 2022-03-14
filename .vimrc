@@ -14,22 +14,6 @@
 :syntax enable
 :colorscheme darcula
 
-" Required for vimwiki
-set nocompatible
-:filetype plugin on
-syntax on
-let personal_wiki = {}
-let personal_wiki.path = '~/Documents/notes/personal'
-let personal_wiki.syntax = 'markdown'
-let personal_wiki.ext = '.md'
-let personal_wiki.diary_rel_path = 'daily_notes'
-let netflix_wiki = {}
-let netflix_wiki.path = '~/Documents/notes/netflix'
-let netflix_wiki.syntax = 'markdown'
-let netflix_wiki.ext = '.md'
-let netflix_wiki.diary_rel_path = 'daily_notes'
-let g:vimwiki_list = [personal_wiki, netflix_wiki]
-
 " Enable pathogen
 :execute pathogen#infect()
 :syntax on
@@ -81,7 +65,7 @@ endif
 
 " Remap the leader to something more convenient than the backslash
 " This shadows the original value of the semicolon, but that's fine - I never really use ftFT anyway
-let mapleader=";"
+" let mapleader=";"
 
 " Toggle NERDTree with ;t
 nnoremap <leader>t :NERDTreeToggle<cr>
@@ -100,3 +84,4 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
