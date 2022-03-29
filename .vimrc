@@ -85,3 +85,34 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
+function! FreezeHeaderRow() abort
+	" Maintain visual alignment of columns
+  :set nowrap
+  " don't auto-wrap long lines
+  :set paste
+  " create an extra window with only 1 line 
+  :let l:windowId=win_getid()
+  :1spl
+  " register this window for auto-close when the other window is closed
+  let w:shouldAutoClose=1
+  " synchronize upper window
+  :set scrollbind
+  " Switch back to main window
+  :call win_gotoid(l:windowId)
+  " synchronize lower window
+  :set scrollbind
+	" synchronize horizontally
+  :set sbo=hor
+endfunction
+
+if exists('##WinClosed')
+  :autocmd WinClosed * :call CloseRelatedWindowsThisBuffer()
+endif
+
+function! CloseRelatedWindowsThisBuffer() abort
+  let l:windowList=win_findbuf(bufnr())
+  call win_execute(win_getid(), ":q")
+  for l:winId in l:windowList
+	  call win_execute(l:winId, "if get(w:, 'shouldAutoClose', 0) | ::q | endif")
+  endfor
+endfunction

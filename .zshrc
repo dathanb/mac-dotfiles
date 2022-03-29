@@ -81,6 +81,7 @@ plugins=(
   dathan-python
   dathan-ruby
   dathan-tmux
+  dathan-timewarrior
   fasd
   dathan-fasd
   zsh-navigation-tools

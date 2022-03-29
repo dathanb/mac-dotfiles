@@ -11,7 +11,7 @@
 # Use the command 'task show' to see all defaults and overrides
 
 # Files
-data.location=~/Documents/notes/tasks
+# Use the default of ~/.task
 
 # Disable garbage collection, to prevent tasks from getting renumbered when `task list` is run
 # To perform garbage collection, run `task rc.gc=1`
