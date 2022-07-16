@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "${0}")"
+
+# detect when a task with a JIRA ticket has been closed, and signal that the JIRA should probably also be closed
+input="$(</dev/stdin)"
+
+echo "----------" >> output.txt
+echo $input  >> output.txt
+
+# print the final version of the task
+echo "$(echo "${input}" | jq -s | jq -c ".[1]")" 
+
