@@ -3,29 +3,43 @@
 import sys
 import json
 
-data = sys.stdin.read().strip()
+def main():
+    data = sys.stdin.read().strip()
 
-decoder = json.JSONDecoder()
+    decoder = json.JSONDecoder()
 
-original_task, offset = decoder.raw_decode(data)
-modified_task, offset = decoder.raw_decode(data[offset:].strip())
+    original_task, offset = decoder.raw_decode(data)
+    modified_task, offset = decoder.raw_decode(data[offset:].strip())
 
-deleted=False
+    deleted=False
 
-print(json.dumps(modified_task))
+#    # Uncomment for debug logging
+#    with open('task.json', 'w') as f:
+#        print(data, file=f)
+#        print(json.dumps(original_task), file=f)
+#        print(json.dumps(modified_task), file=f)
 
-if 'jira' not in modified_task:
+    if len(modified_task) == 0:
+        # task undo removing a task entirely
+        print(json.dumps(original_task))
+    else:
+        print(json.dumps(modified_task))
+
+    if 'jira' not in modified_task:
+        sys.exit(0)
+
+    jira = modified_task['jira']
+
+    if modified_task['status'] == 'deleted':
+        print("Task is linked to jira https://jira.netflix.net/browse/{ticket} . If you delete the task, you'll no longer be tracking the ticket locally.".format(ticket=jira))
+        sys.exit(0)
+
+    if modified_task['status'] == 'completed':
+        print("Task is linked to jira https://jira.netflix.net/browse/{ticket} . Consider closing it, too.".format(ticket=jira))
+        sys.exit(0)
+
     sys.exit(0)
 
-jira = modified_task['jira']
 
-if modified_task['status'] == 'deleted':
-    print("Task is linked to jira https://jira.netflix.net/browse/{ticket} . If you delete the task, you'll no longer be tracking the ticket locally.".format(ticket=jira))
-    sys.exit(0)
-
-if modified_task['status'] == 'completed':
-    print("Task is linked to jira https://jira.netflix.net/browse/{ticket} . Consider closing it, too.".format(ticket=jira))
-    sys.exit(0)
-
-sys.exit(0)
-
+if __name__ == "__main__":
+    main()

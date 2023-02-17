@@ -16,7 +16,7 @@
 # Disable garbage collection, to prevent tasks from getting renumbered when `task list` is run
 # To perform garbage collection, run `task rc.gc=1`
 # Other GC options are described in the comments at https://github.com/GothenburgBitFactory/taskwarrior/issues/2592
-gc=0
+# gc=0
 
 # case-insensitive search by default
 search.case.sensitive=no
@@ -48,3 +48,18 @@ context.personal.write=+personal
 context.work.read=+work
 context.work.write=+work
 news.version=2.6.0
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+context.officeHours.read=+officeHours
+context.officeHours.write=+officeHours
+taskd.certificate=\/Users\/dathanb\/.task\/client.cert.pem
+taskd.key=\/Users\/dathanb\/.task\/client.key.pem
+taskd.ca=\/Users\/dathanb\/.task\/ca.cert.pem
+taskd.server=penumbra:53589
+taskd.credentials=Bennett\/Dathan Bennett\/d253da2f-c6f1-4809-b540-5995fd826d49
+taskd.trust=ignore hostname
+context=work
