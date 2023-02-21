@@ -2,16 +2,17 @@
 
 # Script for adding tasks to TaskWarrior from Obsidian via the "Shell Commands" plugin (https://github.com/Taitava/obsidian-shellcommands)
 
-PATH="${PATH}:/usr/local/bin"
-
 logFile=~/bin/obsidian-to-taskwarrior.log
 rm -f "${logFile}"
 echo "${PATH}" > $logFile
 
+# emoji used by the "tasks" plugin in Obsidian
+emoji="🔽🔼⏫🔁🛫⏳📅✅"
 rawInputLine="$(</dev/stdin)"
 parsedInputLine="$(sed -e 's/^[[:blank:]]*- \[ \] //' <<< "${rawInputLine}")"
+parsedInputLine="$(grep -o "^[^${emoji}]*" <<< "${parsedInputLine}")"
 
-taskOutput="$(task add "$@" -- "${parsedInputLine}")"
+taskOutput="$(/opt/homebrew/bin/task add "$@" -- "${parsedInputLine}")"
 
 # not used
 taskId="$(sed -e 's/Created task \([[:digit:]]\{1,\}\)./\1/' <<< "${taskOutput}" )"
