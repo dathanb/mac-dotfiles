@@ -9,7 +9,7 @@ wip() {
 
   git add -A || return 1
   git ls-files --deleted -z | xargs -0 git rm
-  git commit -m "wip"
+  git commit -m "wip" --no-verify
 }
 
 # If the last commit was a "work in progress" commit, resets it

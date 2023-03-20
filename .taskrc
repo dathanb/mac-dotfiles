@@ -69,11 +69,11 @@ report.focus.description=Focused tasks
 report.focus.columns=id,start.age,entry.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,description,sortOrder
 report.focus.labels=ID,Active,Age,Deps,P,Project,Tag,Recur,S,Due,Until,Description,Order
 report.focus.sort=project+/,sortOrder+
-report.focus.filter=status:pending -WAITING +focus limit:page
+report.focus.filter=status:pending -WAITING -backlog -officeHours limit:page
 default.command=focus
 
 report.backlog.description=Backlog
 report.backlog.columns=id,start.age,entry.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,description,urgency
 report.backlog.labels=ID,Active,Age,Deps,P,Project,Tag,Recur,S,Due,Until,Description,Urg
 report.backlog.sort=urgency-
-report.backlog.filter=status:pending -WAITING -focus limit:page
+report.backlog.filter=status:pending -WAITING +backlog limit:page

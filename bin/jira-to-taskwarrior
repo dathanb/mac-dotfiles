@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#
+# TODO: Rewrite this in rust?
+# I want to support four operations:
+# 1. sync a given task from JIRA to taskwarrior
+# 2. Sync a given task from taskwarrior to jira
+# 3. Sync all tasks from jira to taskwarrior
+# 4. Sync all tasks from taskwarrior to jira
 
 printUsageAndExit() {
   printf "Usage: jira-to-taskwarrior ticketId\n"
