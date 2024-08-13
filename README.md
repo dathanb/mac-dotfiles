@@ -3,3 +3,7 @@ In addition to these, I installed [diff-so-fancy](https://github.com/so-fancy/di
 And [fx](https://github.com/antonmedv/fx)
 
 And [fzf](https://github.com/junegunn/fzf)
+
+And [Shortcat](https://shortcat.app)
+
+And [Alfred](https://www.alfredapp.com/)
