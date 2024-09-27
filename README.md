@@ -26,6 +26,8 @@ Install Amphetamine (don't turn it on by default, but it's invaluable if I need 
 
 Install SwitchResX
 
+Install iterm2
+
 In addition to these, I installed [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) with their default config.
 
 And [fx](https://github.com/antonmedv/fx)
