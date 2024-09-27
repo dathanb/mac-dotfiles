@@ -36,6 +36,8 @@ Install homebrew
 
 Install Oh-My-Zsh
 
+Install Taskwarrior
+
 In addition to these, I installed [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) with their default config.
 
 And [fx](https://github.com/antonmedv/fx)
