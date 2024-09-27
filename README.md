@@ -22,6 +22,10 @@ Disable the keyboard shortcuts for Spotlight - I use Alfred for everything.
 
 Install JetBrains Toolbox
 
+Install Amphetamine (don't turn it on by default, but it's invaluable if I need to run a long-running job without it going to sleep in the middle).
+
+Install SwitchResX
+
 In addition to these, I installed [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) with their default config.
 
 And [fx](https://github.com/antonmedv/fx)
