@@ -32,6 +32,10 @@ Install iterm2
 
 Install SDKMan
 
+Install homebrew
+
+Install Oh-My-Zsh
+
 In addition to these, I installed [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) with their default config.
 
 And [fx](https://github.com/antonmedv/fx)
