@@ -65,3 +65,5 @@ brew install bash
 Install a modern version of Bash
 
 Install rustup
+
+Set up 1Password ssh agent
