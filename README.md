@@ -38,11 +38,13 @@ Install Oh-My-Zsh
 
 Install Taskwarrior
 
-In addition to these, I installed [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) with their default config.
+Install fasd
 
-And [fx](https://github.com/antonmedv/fx)
+install [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) with their default config.
 
-And [fzf](https://github.com/junegunn/fzf)
+Install [fx](https://github.com/antonmedv/fx)
 
-And [Shortcat](https://shortcat.app)
+Install [fzf](https://github.com/junegunn/fzf)
+
+Install [Shortcat](https://shortcat.app)
 
