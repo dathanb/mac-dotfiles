@@ -8,7 +8,7 @@
 :set number
 
 " Use the Source Code Pro font
-:set guifont=SourceCodeVariable-Roman:h14
+:set guifont="SauceCodePro Nerd Font":h14
 
 " Use the Darcula color scheme
 :syntax enable
@@ -63,8 +63,7 @@ if !has('nvim') && $TERM ==# 'screen-256color'
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-" Remap the leader to something more convenient than the backslash
-" This shadows the original value of the semicolon, but that's fine - I never really use ftFT anyway
+" If we want to remap the leader to something other than the backslash, that would happen here
 " let mapleader=";"
 
 " Toggle NERDTree with ;t

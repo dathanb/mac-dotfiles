@@ -46,3 +46,9 @@ zle -N edit-command-line
 bindkey -M vicmd ^v edit-command-line
 
 export PATH="${PATH}:/Users/dathanb/bin"
+
+export function allDone() {
+ ( afplay /System/Library/Sounds/Hero.aiff ) &|
+ ( sleep 0.2; afplay /System/Library/Sounds/Hero.aiff ) &|
+ ( sleep 0.4; afplay /System/Library/Sounds/Hero.aiff ) &|
+}

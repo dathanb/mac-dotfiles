@@ -11,3 +11,5 @@ git_checkout_regex() {
 
   git checkout "$_matching_branches[1]"
 }
+
+alias branch='git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout'
