@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# pre-commit hook to prevent a commit if the commit includes changes that
+# match a set of stop strings
+
+FORBIDDEN='DO NOT COMMIT'
+
+git diff --cached | grep -q -E "${FORBIDDEN}"
+ret=$?
+if [[ $ret = 0 ]]; then
+  printf "COMMIT REJECTED\nFound changes containing forbidden \"${FORBIDDEN}\" references. Please remove them before committing.\n"
+  exit 1
+fi
