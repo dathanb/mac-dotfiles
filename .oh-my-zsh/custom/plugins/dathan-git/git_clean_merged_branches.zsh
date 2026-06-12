@@ -6,5 +6,5 @@ pluginDir="$(dirname $0:A)"
 git_clean_merged_branches() {
   git_verify_repo || return 1
 
-  git branch --merged | egrep -v "(^\*|master|main|dev|develop)" | xargs git branch -d
+  git branch --merged | egrep -v "(^\*|\+|master|main|dev|develop)" | xargs git branch -d
 }
